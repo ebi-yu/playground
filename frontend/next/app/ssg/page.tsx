@@ -1,12 +1,13 @@
-interface IsrTodo {
+interface SsrTodo {
   userId: number;
   id: number;
   title: string;
   completed: boolean;
 }
 
-export default async function IsrPage() {
-  const todo: IsrTodo = await getData();
+export default async function SsrPage() {
+  const todo: SsrTodo = await getData();
+
   return (
     <ul>
       <li> Id : {todo.id}</li>
@@ -18,8 +19,8 @@ export default async function IsrPage() {
 }
 
 async function getData() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos/10", {
-    next: { revalidate: 3 },
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1", {
+    cache: "force-cache",
   });
   return res.json();
 }

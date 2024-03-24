@@ -1,9 +1,26 @@
-import { title } from "@next/components/primitives";
+interface SsrTodo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
 
-export default function PricingPage() {
+export default async function SsrPage() {
+  const todo: SsrTodo = await getData();
+
   return (
-    <div>
-      <h1 className={title()}>Pricing</h1>
-    </div>
+    <ul>
+      <li> Id : {todo.id}</li>
+      <li> userId : {todo.userId}</li>
+      <li> title : {todo.title}</li>
+      <li> completed : {todo.completed.toString()}</li>
+    </ul>
   );
+}
+
+async function getData() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1", {
+    next: { revalidate: 60 },
+  });
+  return res.json();
 }

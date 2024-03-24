@@ -8,7 +8,6 @@ interface SsrTodo {
 export default async function SsrPage() {
   const todo: SsrTodo = await getData();
 
-  console.log(todo);
   return (
     <ul>
       <li> Id : {todo.id}</li>
@@ -20,6 +19,8 @@ export default async function SsrPage() {
 }
 
 async function getData() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1", {
+    cache: "no-store",
+  });
   return res.json();
 }

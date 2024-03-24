@@ -1,9 +1,12 @@
-import colors from "vuetify/lib/util/colors";
-
 export default defineNuxtConfig({
-  css: ["vuetify/lib/styles/main.sass"],
+  routeRules: {
+    "/csr": { ssr: false },
+    "/ssr": { ssr: true },
+    "/ssg": { ssr: true, prerender: true },
+  },
   build: {
     transpile: ["vuetify"],
   },
-  ssr: true,
+  modules: ["@nuxtjs/tailwindcss"],
+  css: ["~/assets/css/global.css"],
 });
