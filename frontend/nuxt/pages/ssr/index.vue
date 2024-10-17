@@ -5,6 +5,7 @@
       <p>Id: {{ data?.id }}</p>
       <p>Title: {{ data?.title }}</p>
       <p>UserId: {{ data?.userId }}</p>
+      <p>{{ csr }}</p>
     </div>
   </div>
 </template>
@@ -13,4 +14,9 @@
 const { data } = (await useAsyncData("run_useAsyncData", () => {
   return $fetch("https://jsonplaceholder.typicode.com/todos/1");
 })) as { data: Ref<Record<string, string>> };
+const csr = ref("");
+
+onMounted(() => {
+  csr.value = "client rendering data";
+});
 </script>
