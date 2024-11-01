@@ -1,0 +1,52 @@
+<style>
+    my-song-list {
+        display: flex;
+        gap: .5rem;
+    }
+
+    my-song {
+        border: 1px solid #999;
+        padding: .2rem;
+        width: 12rem;
+    }
+</style>
+
+<template id="my-template">
+    <style>
+        .title {
+            font-weight: bold;
+        }
+    </style>
+    <div class="title">
+        <slot name="title"></slot>
+    </div>
+    <div class="artist">(By <slot name="artist"></slot>)</div>
+</template>
+
+<my-song-list>
+    <my-song>
+        <span slot="title">Let it be</span>
+        <span slot="artist">The Beatles</span>
+    </my-song>
+    <my-song>
+        <span slot="title">Hotel California</span>
+        <span slot="artist">The Eagles</span>
+    </my-song>
+    <my-song>
+        <span slot="title">Stairway to Heaven</span>
+        <span slot="artist">Led Zeppelin</span>
+    </my-song>
+</my-song-list>
+
+<script>
+    const template = document.getElementById("my-template");
+    customElements.define("my-song",
+        class MySong extends HTMLElement {
+            constructor() {
+                super();
+                const shadowRoot = this.attachShadow({ mode: "open" });
+                shadowRoot.appendChild(template.content.cloneNode(true));
+            }
+        }
+    );
+</script>

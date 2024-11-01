@@ -1,0 +1,26 @@
+<template id="my-template">
+    <style>
+        p {
+            font-weight: bold;
+        }
+    </style>
+    <slot name="message"></slot>
+    <p>shadow DOM で上書きした要素</p>
+</template>
+<div id="my-host">
+    <p>shadow DOMに上書きされて表示されないようそう</p>
+    <p slot="message">Slotが差し込まれる</p>
+</div>
+</body>
+<script>
+    // shadow DOM を使ってtemplate要素をアタッチ
+    const myHost = document.getElementById("my-host");
+    const myHostShadow = myHost.attachShadow({ mode: "open" });
+    const template = document.getElementById("my-template");
+    myHostShadow.appendChild(template.content.cloneNode(true));
+</script>
+<style>
+    p {
+        text-decoration: underline;
+    }
+</style>

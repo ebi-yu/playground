@@ -1,0 +1,21 @@
+<p>shadowCSSが適用されない</p>
+<div id="my-test">
+    <p>Test</p>
+</div>
+<script>
+    const testHost = document.getElementById("my-test")
+
+    // shadow DOMをアタッチ
+    const testHostShadow = testHost.attachShadow({ mode: "open" });
+
+    // shadow DOMにstyleをアタッチ
+    const p = document.createElement("p");
+    const style = document.createElement("style");
+    style.textContent = "p { color: red; }";
+
+    // shadow DOMにshadow DOMをセットする。
+    testHostShadow.appendChild(style);
+    p.innerHTML = "<p>上書きされた</p>";
+    p.style = "p { color:red; }"
+    testHostShadow.appendChild(p);
+</script>
