@@ -1,3 +1,4 @@
 packages:
   - "middleware/*"
-  - "frontend/*"
+  - "qiita/*/*"
+  - "zeen/scrap/*"
